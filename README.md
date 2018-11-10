@@ -1,4 +1,4 @@
-# [Sitka](http://www.sitka.io/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mcneillj/sitka/blob/master/LICENSE) [![TravisCI  Status](https://travis-ci.org/mcneillj/sitka.svg?branch=master?style=shield&circle-token=:circle-token)](https://travis-ci.org/mcneillj/sitka)
+# [Sitka](http://www.sitka.io/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mcneillj/sitka/blob/master/LICENSE) [![Build Status](https://travis-ci.org/mcneillj/sitka.svg?branch=master)](https://travis-ci.org/mcneillj/sitka)
 
 Sitka is a built environment analysis and modeling library for Python.
 
