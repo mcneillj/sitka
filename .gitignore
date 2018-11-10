@@ -26,6 +26,9 @@ var/
 .installed.cfg
 *.egg
 
+# Pytest
+*.pytest_cache
+
 # IPython Notebook
 .ipynb_checkpoints
 
