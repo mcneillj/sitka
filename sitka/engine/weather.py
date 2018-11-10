@@ -5,7 +5,6 @@ import pandas as pd
 
 class WeatherFile:
     def __init__(self, settings, time, filename):  #weather_file_path, weather_file_name):
-        self.path = os.path.join(settings.working_directory, 'weather_data')  # weather_file_path
         self.filename = filename  # weather_file_name    #Name of weather file
         self._time = time
         self.data_imported = False
@@ -59,8 +58,7 @@ class WeatherFile:
 
     def import_epw_header(self):
         # Import to dataframe
-        abs_path = os.path.join(self.path, self.filename)
-        temp = pd.read_csv(abs_path, skiprows=0, nrows=1,header=None)
+        temp = pd.read_csv(self.filename, skiprows=0, nrows=1,header=None)
         self.location = temp[1][0] #weather station name
         self.state = temp[2][0] #state
         self.country = temp[3][0] #country
@@ -70,14 +68,12 @@ class WeatherFile:
         self.longitude = float(temp[7][0]) #longitude [deg]
         self.time_zone = float(temp[8][0]) #time zone [hr]
         self.elevation = float(temp[9][0])  #elevation [m]
-        #row2 = pd.read_csv(abs_path, skiprows=1, nrows=1,header=None)
 
     def import_epw_column_data(self):
         # Read EPW weather file
 
         # Import to dataframe
-        abs_path = os.path.join(self.path, self.filename)
-        df = pd.read_csv(abs_path, skiprows=8, names=self.columns)
+        df = pd.read_csv(self.filename, skiprows=8, names=self.columns)
 
         # Set time index
         time_index = pd.to_datetime({
