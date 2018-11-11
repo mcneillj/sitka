@@ -4,7 +4,7 @@ from io import open
 
 setup(
     name='sitka',
-    version='0.1.1',
+    version='0.1.2',
     description='A built environment analysis and modeling library for Python.',
     long_description="""# A library for built environment modeling and simulation
                         directly in Python.""",
