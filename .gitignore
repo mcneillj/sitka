@@ -34,3 +34,7 @@ var/
 
 # virtualenv
 venv/
+
+# coverage reports
+.coverage
+.coverage.*

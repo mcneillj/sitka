@@ -2,10 +2,19 @@ language: python
 python:
   - "3.5"
   - "3.6"
-  - "3.7-dev"
+  - "3.7"
+dist: xenial
+sudo: true
+# install dev dependencies
+before_install:
+  - pip install pytest-cov
+  - pip install codecov
 # install dependencies
 install:
-  - pip install -r requirements.txt
+  - python setup.py install
 # run tests
 script:
-  - pytest
+  - pytest --cov=./
+# upload coverage reports
+after_success:
+  - codecov
