@@ -137,3 +137,97 @@ class SolarAngles(TimeSeriesComponent):
     def site(self, value):
         self._site= value
         self.update_calculated_values()
+
+
+class SurfaceSolarAngles:
+    def __init__(self, name, time, solar_angles, surface):
+        # General properties
+        self.name = name
+        self.sun_surface_azimuth = None
+        self.incidence_angle = None
+        self.sun_on_surface = None
+        self.profile_angle = None
+
+        # Associated objects
+        self._time = time
+        self._surface = surface
+        self._solar_angles = solar_angles
+
+        # Run method to update all calculated values
+        self.update_calculated_values()
+
+    def update_calculated_values(self):
+        print('Updating surface solar calculations for ' + self.name)
+        self.calculate_sun_surface_azimuth()  # Sun-surface azimuth angle [deg]
+        self.calculate_sun_on_surface()  # Times where surface is sunlit [date-time]
+        self.calculate_incidence_angle()  # Sun-surface incidence angle [deg]
+        self.calculate_profile_angle()
+
+    def calculate_sun_surface_azimuth(self):
+        surface_azimuth = np.ones(self.time.length)*self.surface.azimuth
+        solar_azimuth = self.solar_angles.solar_azimuth
+        sun_surface_azimuth = np.abs(surface_azimuth - solar_azimuth)
+        self.sun_surface_azimuth = pd.Series(sun_surface_azimuth, index=self.time.datetime_range)
+
+    def calculate_sun_on_surface(self):
+        sun_on_surface = False*np.ones(self.time.length)
+        sun_on_surface[
+            (self.solar_angles.solar_altitude > 0) &
+            (self.sun_surface_azimuth < 90) &
+            (self.sun_surface_azimuth > -90)
+        ] = True
+        self.sun_on_surface = pd.Series(sun_on_surface, index=self.time.datetime_range)
+
+    def calculate_incidence_angle(self):
+        sun_on_surface = self.sun_on_surface
+        latitude = np.deg2rad(self.solar_angles.site.latitude)
+        declination = np.deg2rad(self.solar_angles.declination)
+        hour_angle = np.deg2rad(self.solar_angles.hour_angle)
+        solar_altitude = np.deg2rad(self.solar_angles.solar_altitude)
+        surface_tilt = np.deg2rad(self.surface.tilt)
+        surface_azimuth = np.deg2rad(self.surface.azimuth)
+        sun_surface_azimuth = np.deg2rad(self.sun_surface_azimuth)
+        incidence_angle = np.rad2deg(np.arccos(np.cos(solar_altitude)*np.cos(sun_surface_azimuth)*np.sin(surface_tilt)+np.sin(solar_altitude)*np.cos(surface_tilt)))
+        """
+        term1 = np.sin(declination)*np.sin(latitude)*np.cos(surface_tilt)
+        term2 = np.sin(declination)*np.cos(latitude)*np.sin(surface_tilt)*np.cos(surface_azimuth)
+        term3 = np.cos(declination)*np.cos(latitude)*np.cos(surface_tilt)*np.cos(hour_angle)
+        term4 = np.cos(declination)*np.sin(latitude)*np.sin(surface_tilt)*np.cos(surface_azimuth)*np.cos(hour_angle)
+        term5 = np.cos(declination)*np.sin(surface_tilt)*np.sin(surface_azimuth)*np.sin(hour_angle)
+        incidence_angle = np.rad2deg(np.arccos(term1-term2+term3+term4+term5))
+        """
+        self.incidence_angle = pd.Series(incidence_angle, index=self.time.datetime_range)
+
+    def calculate_profile_angle(self):
+        sun_on_surface = self.sun_on_surface
+        solar_altitude = np.deg2rad(self.solar_angles.solar_altitude)
+        sun_surface_azimuth = np.deg2rad(self.sun_surface_azimuth)
+        profile_angle = np.rad2deg(np.arctan(np.tan(solar_altitude)/(np.cos(sun_surface_azimuth))))
+        self.profile_angle = pd.Series(profile_angle, index=self.time.datetime_range)
+
+    @property
+    def time(self):
+        return self._time
+
+    @time.setter
+    def time(self, value):
+        self._time = value
+        self.update_calculated_values()
+
+    @property
+    def surface(self):
+        return self._surface
+
+    @surface.setter
+    def surface(self, value):
+        self._surface= value
+        self.update_calculated_values()
+
+    @property
+    def solar_angles(self):
+        return self._solar_angles
+
+    @solar_angles.setter
+    def solar_angles(self, value):
+        self._solar_angles = value
+        self.update_calculated_values()
