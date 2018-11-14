@@ -4,6 +4,59 @@ import pandas as pd
 from sitka.utils.time_series import TimeSeriesComponent
 
 class SolarAngles(TimeSeriesComponent):
+    """
+    Store solar angles for a site.
+
+    ...
+
+    Attributes
+    ----------
+    gamma : pd.Series
+        Gamma angle.
+    equation_of_time: pd.Series
+        Equation of time.
+    apparent_solar_time: pd.Series
+        Apparent solar time.
+    declination: pd.Series
+        Solar declination angle.
+    hour_angle: pd.Series
+        Hour angle of the sun.
+    number_of_sunlight_hours: pd.Series
+        Number of sunlight hours per day.
+    sun_up: pd.Series
+        Flag to define when the sun is above the
+        horizon (1 = sun up, 0 = sun is down).
+    solar_zenith: pd.Series
+        Solar zenith angle.
+    solar_altitude: pd.Series
+        Solar altitude angle.
+    solar_azimuth: pd.Series
+        Solar azimuth angle.
+    air_mass: pd.Series
+        Air mass.
+    site: Site
+        A linked Site object.
+    time: Time
+        A linked Time object.
+
+    Methods
+    -------
+    update_calculated_values
+    calculate_gamma
+    calculate_equation_of_time
+    calculate_apparent_solar_time
+    calculate_declination
+    calculate_hour_angle
+    calculate_sunrise_hour_angle
+    calculate_sunset_hour_angle
+    calculate_number_of_sunlight_hours
+    calculate_sun_up
+    calculate_solar_zenith
+    calculate_solar_altitude
+    calculate_solar_azimuth
+    calculate_air_mass
+
+    """
     def __init__(self, time, site):
         # Solar angles
         self.gamma = None
@@ -30,6 +83,9 @@ class SolarAngles(TimeSeriesComponent):
         self.update_calculated_values()
 
     def update_calculated_values(self):
+        """Update all calculated values.
+
+        """
         print('Updating solar angles')
         self.calculate_gamma()
         self.calculate_equation_of_time()
@@ -46,10 +102,39 @@ class SolarAngles(TimeSeriesComponent):
         self.calculate_air_mass()
 
     def calculate_gamma(self):
+        """
+        Calculate Gamma from the julian_day.
+
+        Parameters
+        ----------
+        julian_day : Series
+            Julian day number [1-365]
+
+        Yields
+        --------
+        gamma : Series
+
+        References
+        --------
+        """
         gamma = 360*(self.time.julian_day-1)/365
-        self.gamma = pd.Series(gamma) #pd.Series(gamma)
+        self.gamma = pd.Series(gamma)
 
     def calculate_equation_of_time(self):
+        """
+        Calculate equation of time from Gamma.
+
+        Parameters
+        ----------
+        gamma : Series
+
+        Yields
+        --------
+        equation_of_time : Series
+
+        References
+        --------
+        """
         gamma = self.gamma
         cosgamma = np.cos(np.deg2rad(gamma))
         singamma = np.sin(np.deg2rad(gamma))
@@ -59,32 +144,137 @@ class SolarAngles(TimeSeriesComponent):
         self.equation_of_time = pd.Series(equation_of_time)
 
     def calculate_apparent_solar_time(self):
+        """
+        Calculate the apparent solar time for each item in the series.
+
+        Parameters
+        ----------
+        hour : Series
+        equation_of_time : Series
+        longitude : float
+        local_standard_meridian : float
+
+        Yields
+        ----------
+        apparent_solar_time : Series
+
+        References
+        --------
+        """
         hr = self.time.datetime_range.hour
         apparent_solar_time = hr + self.equation_of_time/60 + (self.site.longitude-self.site.local_standard_meridian)/15
         self.apparent_solar_time = pd.Series(apparent_solar_time)
 
     def calculate_declination(self):
+        """
+        Calculate the solar declination angle for each item in the series.
+
+        Parameters
+        ----------
+        julian_day : Series
+
+        Yields
+        ----------
+        declination : Series
+
+        References
+        --------
+        """
         declination =  23.45*(np.sin(np.deg2rad(360*(self.time.julian_day+284)/365)))
         self.declination = pd.Series(declination)
 
     def calculate_hour_angle(self):
+        """
+        Calculate the solar hour angle for each item in the series.
+
+        Parameters
+        ----------
+        apparent_solar_time : Series
+
+        Yields
+        ----------
+        hour_angle : Series
+
+        References
+        --------
+        """
         hour_angle = 15*(self.apparent_solar_time-12)
         self.hour_angle = pd.Series(hour_angle)
 
     def calculate_sunrise_hour_angle(self):
+        """
+        Calculate the sunrise hour angle for each item in the series.
+
+        Parameters
+        ----------
+        latitude : float
+        declination : Series
+
+        Yields
+        ----------
+        sunrise_hour_angle : Series
+
+        References
+        --------
+        """
         sunrise_hour_angle = -np.rad2deg(np.arccos(-np.tan(np.deg2rad(self.site.latitude))*np.tan(np.deg2rad(self.declination))))
         self.sunrise_hour_angle = pd.Series(sunrise_hour_angle)
 
     def calculate_sunset_hour_angle(self):
+        """
+        Calculate the sunset hour angle for each item in the series.
+
+        Parameters
+        ----------
+        latitude : float
+        declination : Series
+
+        Yields
+        ----------
+        sunset_hour_angle : Series
+
+        References
+        --------
+        """
         sunset_hour_angle = np.rad2deg(np.arccos(-np.tan(np.deg2rad(self.site.latitude))*np.tan(np.deg2rad(self.declination))))
         self.sunset_hour_angle = pd.Series(sunset_hour_angle)
 
     def calculate_number_of_sunlight_hours(self):
+        """
+        Calculate the number of sunlight hours per day for each item in the series.
+
+        Parameters
+        ----------
+        latitude : float
+        declination : Series
+
+        Yields
+        ----------
+        number_of_sunlight_hours : Series
+
+        References
+        --------
+        """
         number_of_sunlight_hours = 2/15*np.rad2deg(np.arccos(-np.tan(np.deg2rad(self.site.latitude))*np.tan(np.deg2rad(self.declination))))
         self.number_of_sunlight_hours = pd.Series(number_of_sunlight_hours)
 
     def calculate_sun_up(self):
-        ## TODO partial hours
+        """
+        Set a flag for whether the sun is above the horizon for each item in the series.
+
+        Parameters
+        ----------
+        hour_angle : Series
+        sunrise_hour_angle : Series
+        sunset_hour_angle : Series
+
+        Yields
+        ----------
+        sun_up : Series
+
+        References
+        --------
+        """
         sun_up = np.ones(self.time.length)*False
         sun_up[
             (self.hour_angle > self.sunrise_hour_angle) &
@@ -94,6 +284,23 @@ class SolarAngles(TimeSeriesComponent):
         self.sun_up = pd.Series(sun_up)
 
     def calculate_solar_zenith(self):
+        """
+        Calculate the solar zenith angle for each item in the series.
+
+        Parameters
+        ----------
+        latitude : float
+        sun_up : Series
+        declination : Series
+        hour_angle : Series
+
+        Yields
+        ----------
+        solar_zenith : Series
+
+        References
+        --------
+        """
         sun_up = self.sun_up
         latitude = np.deg2rad(self.site.latitude)
         declination = np.deg2rad(self.declination)
@@ -102,18 +309,44 @@ class SolarAngles(TimeSeriesComponent):
         self.solar_zenith = pd.Series(solar_zenith)
 
     def calculate_solar_altitude(self):
-        #rad_latitude = np.deg2rad(self.site.latitude)
-        #rad_declination = np.deg2rad(self.declination)
-        #rad_hour_angle = np.deg2rad(self.hour_angle)
-        #rad_solar_altitude = np.arcsin(np.cos(rad_latitude)*np.cos(rad_declination)*np.cos(rad_hour_angle)+np.sin(rad_latitude)*np.sin(rad_declination))
-        #solar_altitude = np.rad2deg(rad_solar_altitude)
-        #solar_altitude[solar_altitude<0] = 0
+        """
+        Calculate the solar altitude angle for each item in the series.
+
+        Parameters
+        ----------
+        calculate_sun_up : Series
+        solar_zenith : Series
+
+        Yields
+        ----------
+        solar_altitude : Series
+
+        References
+        --------
+        """
         sun_up = self.sun_up
         solar_zenith = self.solar_zenith
         solar_altitude = sun_up*(90-solar_zenith)
         self.solar_altitude = pd.Series(solar_altitude)
 
     def calculate_solar_azimuth(self):
+        """
+        Calculate the solar azimuth angle for each item in the series.
+
+        Parameters
+        ----------
+        latitude : float
+        declination : Series
+        hour_angle : Series
+        solar_altitude : Series
+
+        Yields
+        ----------
+        solar_azimuth : Series
+
+        References
+        --------
+        """
         rad_latitude = np.deg2rad(self.site.latitude)
         rad_declination = np.deg2rad(self.declination)
         rad_hour_angle = np.deg2rad(self.hour_angle)
@@ -123,7 +356,21 @@ class SolarAngles(TimeSeriesComponent):
         self.solar_azimuth = pd.Series(solar_azimuth)
 
     def calculate_air_mass(self):
-        # Air mass [M]
+        """
+        Calculate the air mass for each item in the series. [M]
+
+        Parameters
+        ----------
+        sun_up : Series
+        solar_zenith : Series
+
+        Yields
+        ----------
+        air_mass : Series
+
+        References
+        --------
+        """
         sun_up = self.sun_up
         solar_zenith = self.solar_zenith
         air_mass = sun_up*1/np.cos(np.deg2rad(solar_zenith))

@@ -1,5 +1,18 @@
 class Settings:
-    def __init__(self, working_directory):
-        # TODO Add simulation start and stop time
+    """
+    Store general simulation settings.
 
+    ...
+
+    Parameters
+    ----------
+    working_directory : str
+        A valid directory used for working files.
+
+    Attributes
+    ----------
+    working_directory
+
+    """
+    def __init__(self, working_directory):
         self.working_directory = working_directory

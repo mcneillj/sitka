@@ -1,4 +1,22 @@
 class TimeSeriesComponent:
+    """
+    Component to attach the date-time object to a Pandas series attribute.
+
+    ...
+
+    Parameters
+    ----------
+    time : Time object
+
+    Attributes
+    ----------
+    _time
+
+    Methods
+    -------
+    update_calculated_values
+
+    """
     def __init__(self, time):
         # General Properties
         self._time = time

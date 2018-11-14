@@ -1,9 +1,42 @@
 import numpy as np
 import pandas as pd
 
-# TODO Get start and stop times from settings
-
 class Time:
+        """
+        Object to store solar angles for a site.
+
+        ...
+
+        Parameters
+        ----------
+        year : int
+            The year to use in starting the date-time.
+        start_hour : int
+            The hour to start simulations.
+        end_hour : int
+            The ending hour for simulations.
+        time_steps_per_hour : int
+            The number of time steps per hour for a simulation.
+
+        Attributes
+        ----------
+        time_range
+        datetime_range
+        time_step
+        _year
+        _start_hour
+        _end_hour
+        _time_steps_per_hour
+
+        Methods
+        -------
+        update_calculated_values
+        calculate_time_step
+        calculate_time_range
+        calculate_datetime_range
+        calculate_julian_day
+
+        """
     def __init__(self, year=pd.datetime.now().year, start_hour=0, end_hour=8760, time_steps_per_hour=4):
         self.time_range = None
         self.datetime_range = None
@@ -19,6 +52,9 @@ class Time:
         self.update_calculated_values()
 
     def update_calculated_values(self):
+        """Update all calculated values.
+
+        """
         print('Updating time object')
         self.calculate_time_step()
         self.calculate_time_range()
@@ -26,9 +62,34 @@ class Time:
         self.calculate_julian_day()
 
     def calculate_time_step(self):
+        """
+        Deterine the number of time steps to use per hour.
+
+        Parameters
+        ----------
+        time_steps_per_hour
+
+        Yields
+        --------
+        time_step : float
+        """
+        time_step : Series
         self.time_step = 3600/self.time_steps_per_hour  # time step [s]
 
     def calculate_time_range(self):
+        """
+        Deterine the time range.
+
+        Parameters
+        ----------
+        start_hour
+        end_hour
+        time_step
+
+        Yields
+        --------
+        time_range : array of floats
+        """
         start_hour = self.start_hour*3600
         end_hour = self.end_hour*3600
         dt = self.time_step
@@ -37,6 +98,20 @@ class Time:
         self.length = len(time_range)
 
     def calculate_datetime_range(self):
+        """
+        Create a date time array for the given range.
+
+        Parameters
+        ----------
+        year
+        start_hour
+        end_hour
+        time_steps_per_hour
+
+        Yields
+        --------
+        date_time_range : array of date-time objects
+        """
         date_str = '1/1/%d 00:00:00' % self.year
         start = pd.to_datetime(date_str) + pd.Timedelta(hours=self.start_hour)
         hourly_periods = (self.end_hour-self.start_hour)*self.time_steps_per_hour
