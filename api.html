@@ -1,0 +1,713 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>API Reference &#8212; sitka 0.1.2 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Basics" href="development/basics.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="api-reference">
+<span id="api"></span><h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general">
+<h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-sitka.general.settings">
+<span id="settings"></span><h3>Settings<a class="headerlink" href="#module-sitka.general.settings" title="Permalink to this headline">¶</a></h3>
+<p>General model environment and simulation settings.</p>
+<dl class="class">
+<dt id="sitka.general.settings.Settings">
+<em class="property">class </em><code class="descclassname">sitka.general.settings.</code><code class="descname">Settings</code><span class="sig-paren">(</span><em>working_directory</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/general/settings.html#Settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.general.settings.Settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store general simulation settings.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>working_directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – A valid directory used for working files.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="sitka.general.settings.Settings.working_directory">
+<code class="descname">working_directory</code><a class="headerlink" href="#sitka.general.settings.Settings.working_directory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="input-output">
+<h2>Input/Output<a class="headerlink" href="#input-output" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-sitka.io.time">
+<span id="time"></span><h3>Time<a class="headerlink" href="#module-sitka.io.time" title="Permalink to this headline">¶</a></h3>
+<p>Time constructs.</p>
+<dl class="class">
+<dt id="sitka.io.time.Time">
+<em class="property">class </em><code class="descclassname">sitka.io.time.</code><code class="descname">Time</code><span class="sig-paren">(</span><em>year=2018</em>, <em>start_hour=0</em>, <em>end_hour=8760</em>, <em>time_steps_per_hour=4</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/io/time.html#Time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.io.time.Time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object to store solar angles for a site.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>year</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – The year to use in starting the date-time.</li>
+<li><strong>start_hour</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – The hour to start simulations.</li>
+<li><strong>end_hour</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – The ending hour for simulations.</li>
+<li><strong>time_steps_per_hour</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – The number of time steps per hour for a simulation.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="sitka.io.time.Time.time_range">
+<code class="descname">time_range</code><a class="headerlink" href="#sitka.io.time.Time.time_range" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.io.time.Time.datetime_range">
+<code class="descname">datetime_range</code><a class="headerlink" href="#sitka.io.time.Time.datetime_range" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.io.time.Time.time_step">
+<code class="descname">time_step</code><a class="headerlink" href="#sitka.io.time.Time.time_step" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.io.time.Time._year">
+<code class="descname">_year</code><a class="headerlink" href="#sitka.io.time.Time._year" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.io.time.Time._start_hour">
+<code class="descname">_start_hour</code><a class="headerlink" href="#sitka.io.time.Time._start_hour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.io.time.Time._end_hour">
+<code class="descname">_end_hour</code><a class="headerlink" href="#sitka.io.time.Time._end_hour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.io.time.Time._time_steps_per_hour">
+<code class="descname">_time_steps_per_hour</code><a class="headerlink" href="#sitka.io.time.Time._time_steps_per_hour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sitka.io.time.Time.update_calculated_values">
+<code class="descname">update_calculated_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/io/time.html#Time.update_calculated_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.io.time.Time.update_calculated_values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sitka.io.time.Time.calculate_time_step">
+<code class="descname">calculate_time_step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/io/time.html#Time.calculate_time_step"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.io.time.Time.calculate_time_step" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sitka.io.time.Time.calculate_time_range">
+<code class="descname">calculate_time_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/io/time.html#Time.calculate_time_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.io.time.Time.calculate_time_range" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sitka.io.time.Time.calculate_datetime_range">
+<code class="descname">calculate_datetime_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/io/time.html#Time.calculate_datetime_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.io.time.Time.calculate_datetime_range" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sitka.io.time.Time.calculate_julian_day">
+<code class="descname">calculate_julian_day</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/io/time.html#Time.calculate_julian_day"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.io.time.Time.calculate_julian_day" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">calculate_datetime_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/io/time.html#Time.calculate_datetime_range"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Create a date time array for the given range.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>year</strong> – </li>
+<li><strong>start_hour</strong> – </li>
+<li><strong>end_hour</strong> – </li>
+<li><strong>time_steps_per_hour</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><strong>date_time_range</strong> (<em>array of date-time objects</em>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">calculate_time_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/io/time.html#Time.calculate_time_range"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Deterine the time range.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start_hour</strong> – </li>
+<li><strong>end_hour</strong> – </li>
+<li><strong>time_step</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><strong>time_range</strong> (<em>array of floats</em>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">calculate_time_step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/io/time.html#Time.calculate_time_step"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Deterine the number of time steps to use per hour.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>time_steps_per_hour</strong> – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><strong>time_step</strong> (<em>float</em>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">update_calculated_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/io/time.html#Time.update_calculated_values"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Update all calculated values.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-sitka.io.weather">
+<span id="weather"></span><h3>Weather<a class="headerlink" href="#module-sitka.io.weather" title="Permalink to this headline">¶</a></h3>
+<p>Weather files and weather data imports.</p>
+</div>
+</div>
+<div class="section" id="calculations">
+<h2>Calculations<a class="headerlink" href="#calculations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-sitka.calculations.solar">
+<span id="solar"></span><h3>Solar<a class="headerlink" href="#module-sitka.calculations.solar" title="Permalink to this headline">¶</a></h3>
+<p>Solar geometry, angles and shading.</p>
+<dl class="class">
+<dt id="sitka.calculations.solar.SolarAngles">
+<em class="property">class </em><code class="descclassname">sitka.calculations.solar.</code><code class="descname">SolarAngles</code><span class="sig-paren">(</span><em>time</em>, <em>site</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/calculations/solar.html#SolarAngles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.calculations.solar.SolarAngles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store solar angles for a site.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>time</strong> – </li>
+<li><strong>site</strong> – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="sitka.calculations.solar.SolarAngles.gamma">
+<code class="descname">gamma</code><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.gamma" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Series</em> – Gamma angle.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.calculations.solar.SolarAngles.equation_of_time">
+<code class="descname">equation_of_time</code><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.equation_of_time" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Series</em> – Equation of time.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.calculations.solar.SolarAngles.apparent_solar_time">
+<code class="descname">apparent_solar_time</code><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.apparent_solar_time" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Series</em> – Apparent solar time.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.calculations.solar.SolarAngles.declination">
+<code class="descname">declination</code><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.declination" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Series</em> – Solar declination angle.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.calculations.solar.SolarAngles.hour_angle">
+<code class="descname">hour_angle</code><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.hour_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Series</em> – Hour angle of the sun.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.calculations.solar.SolarAngles.number_of_sunlight_hours">
+<code class="descname">number_of_sunlight_hours</code><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.number_of_sunlight_hours" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Series</em> – Number of sunlight hours per day.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.calculations.solar.SolarAngles.sun_up">
+<code class="descname">sun_up</code><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.sun_up" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Series</em> – Flag to define when the sun is above the
+horizon (1 = sun up, 0 = sun is down).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.calculations.solar.SolarAngles.solar_zenith">
+<code class="descname">solar_zenith</code><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.solar_zenith" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Series</em> – Solar zenith angle.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.calculations.solar.SolarAngles.solar_altitude">
+<code class="descname">solar_altitude</code><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.solar_altitude" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Series</em> – Solar altitude angle.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.calculations.solar.SolarAngles.solar_azimuth">
+<code class="descname">solar_azimuth</code><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.solar_azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Series</em> – Solar azimuth angle.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sitka.calculations.solar.SolarAngles.calculate_apparent_solar_time">
+<code class="descname">calculate_apparent_solar_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/calculations/solar.html#SolarAngles.calculate_apparent_solar_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.calculate_apparent_solar_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the apparent solar time for each item in the series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hour</strong> (<em>Series</em>) – </li>
+<li><strong>equation_of_time</strong> (<em>Series</em>) – </li>
+<li><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – </li>
+<li><strong>local_standard_meridian</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><strong>apparent_solar_time</strong> (<em>Series</em>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sitka.calculations.solar.SolarAngles.calculate_declination">
+<code class="descname">calculate_declination</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/calculations/solar.html#SolarAngles.calculate_declination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.calculate_declination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the solar declination angle for each item in the series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>julian_day</strong> (<em>Series</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><strong>declination</strong> (<em>Series</em>)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sitka.calculations.solar.SolarAngles.calculate_equation_of_time">
+<code class="descname">calculate_equation_of_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/calculations/solar.html#SolarAngles.calculate_equation_of_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.calculate_equation_of_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate equation of time from Gamma.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>gamma</strong> (<em>Series</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><strong>equation_of_time</strong> (<em>Series</em>)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sitka.calculations.solar.SolarAngles.calculate_gamma">
+<code class="descname">calculate_gamma</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/calculations/solar.html#SolarAngles.calculate_gamma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.calculate_gamma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate Gamma from the julian_day.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>julian_day</strong> (<em>Series</em>) – Julian day number [1-365]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><strong>gamma</strong> (<em>Series</em>)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sitka.calculations.solar.SolarAngles.calculate_hour_angle">
+<code class="descname">calculate_hour_angle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/calculations/solar.html#SolarAngles.calculate_hour_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.calculate_hour_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the solar hour angle for each item in the series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>apparent_solar_time</strong> (<em>Series</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><strong>hour_angle</strong> (<em>Series</em>)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sitka.calculations.solar.SolarAngles.calculate_number_of_sunlight_hours">
+<code class="descname">calculate_number_of_sunlight_hours</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/calculations/solar.html#SolarAngles.calculate_number_of_sunlight_hours"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.calculate_number_of_sunlight_hours" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the number of sunlight hours per day for each item in the series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – </li>
+<li><strong>declination</strong> (<em>Series</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><strong>number_of_sunlight_hours</strong> (<em>Series</em>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sitka.calculations.solar.SolarAngles.calculate_solar_altitude">
+<code class="descname">calculate_solar_altitude</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/calculations/solar.html#SolarAngles.calculate_solar_altitude"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.calculate_solar_altitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the solar altitude angle for each item in the series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>calculate_sun_up</strong> (<em>Series</em>) – </li>
+<li><strong>solar_zenith</strong> (<em>Series</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><strong>solar_altitude</strong> (<em>Series</em>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sitka.calculations.solar.SolarAngles.calculate_solar_azimuth">
+<code class="descname">calculate_solar_azimuth</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/calculations/solar.html#SolarAngles.calculate_solar_azimuth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.calculate_solar_azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the solar azimuth angle for each item in the series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – </li>
+<li><strong>declination</strong> (<em>Series</em>) – </li>
+<li><strong>hour_angle</strong> (<em>Series</em>) – </li>
+<li><strong>solar_altitude</strong> (<em>Series</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><strong>solar_azimuth</strong> (<em>Series</em>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sitka.calculations.solar.SolarAngles.calculate_solar_zenith">
+<code class="descname">calculate_solar_zenith</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/calculations/solar.html#SolarAngles.calculate_solar_zenith"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.calculate_solar_zenith" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the solar zenith angle for each item in the series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – </li>
+<li><strong>sun_up</strong> (<em>Series</em>) – </li>
+<li><strong>declination</strong> (<em>Series</em>) – </li>
+<li><strong>hour_angle</strong> (<em>Series</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><strong>solar_zenith</strong> (<em>Series</em>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sitka.calculations.solar.SolarAngles.calculate_sun_up">
+<code class="descname">calculate_sun_up</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/calculations/solar.html#SolarAngles.calculate_sun_up"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.calculate_sun_up" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a flag for whether the sun is above the horizon for each item in the series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hour_angle</strong> (<em>Series</em>) – </li>
+<li><strong>sunrise_hour_angle</strong> (<em>Series</em>) – </li>
+<li><strong>sunset_hour_angle</strong> (<em>Series</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><strong>sun_up</strong> (<em>Series</em>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sitka.calculations.solar.SolarAngles.calculate_sunrise_hour_angle">
+<code class="descname">calculate_sunrise_hour_angle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/calculations/solar.html#SolarAngles.calculate_sunrise_hour_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.calculate_sunrise_hour_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the sunrise hour angle for each item in the series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – </li>
+<li><strong>declination</strong> (<em>Series</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><strong>sunrise_hour_angle</strong> (<em>Series</em>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sitka.calculations.solar.SolarAngles.calculate_sunset_hour_angle">
+<code class="descname">calculate_sunset_hour_angle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/calculations/solar.html#SolarAngles.calculate_sunset_hour_angle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.calculate_sunset_hour_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the sunset hour angle for each item in the series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – </li>
+<li><strong>declination</strong> (<em>Series</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><strong>sunset_hour_angle</strong> (<em>Series</em>)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sitka.calculations.solar.SolarAngles.update_calculated_values">
+<code class="descname">update_calculated_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/calculations/solar.html#SolarAngles.update_calculated_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.calculations.solar.SolarAngles.update_calculated_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update all calculated values.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="components">
+<h2>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-sitka.components.site">
+<span id="site"></span><h3>Site<a class="headerlink" href="#module-sitka.components.site" title="Permalink to this headline">¶</a></h3>
+<p>Site and building information.</p>
+<dl class="class">
+<dt id="sitka.components.site.Site">
+<em class="property">class </em><code class="descclassname">sitka.components.site.</code><code class="descname">Site</code><span class="sig-paren">(</span><em>latitude=0</em>, <em>longitude=0</em>, <em>elevation=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/components/site.html#Site"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.components.site.Site" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represent the building site location and properties.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>latitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Site latitude in degrees.</li>
+<li><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Site longitude in degrees.</li>
+<li><strong>elevation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – Site elevation above sea-level in meters.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="sitka.components.site.Site.local_standard_meridian">
+<code class="descname">local_standard_meridian</code><a class="headerlink" href="#sitka.components.site.Site.local_standard_meridian" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.components.site.Site.latitude">
+<code class="descname">latitude</code><a class="headerlink" href="#sitka.components.site.Site.latitude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.components.site.Site.longitude">
+<code class="descname">longitude</code><a class="headerlink" href="#sitka.components.site.Site.longitude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="sitka.components.site.Site.elevation">
+<code class="descname">elevation</code><a class="headerlink" href="#sitka.components.site.Site.elevation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sitka.components.site.Site.update_calculated_values">
+<code class="descname">update_calculated_values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/components/site.html#Site.update_calculated_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.components.site.Site.update_calculated_values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="sitka.components.site.Site.calculate_local_standard_meridian">
+<code class="descname">calculate_local_standard_meridian</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/components/site.html#Site.calculate_local_standard_meridian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sitka.components.site.Site.calculate_local_standard_meridian" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">calculate_local_standard_meridian</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sitka/components/site.html#Site.calculate_local_standard_meridian"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Calculate the local standard meridian based on the site longitude.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>longitude</strong> – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><strong>local_standard_meridian</strong> (<em>float</em>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API Reference</a><ul>
+<li><a class="reference internal" href="#general">General</a><ul>
+<li><a class="reference internal" href="#module-sitka.general.settings">Settings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#input-output">Input/Output</a><ul>
+<li><a class="reference internal" href="#module-sitka.io.time">Time</a></li>
+<li><a class="reference internal" href="#module-sitka.io.weather">Weather</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#calculations">Calculations</a><ul>
+<li><a class="reference internal" href="#module-sitka.calculations.solar">Solar</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#components">Components</a><ul>
+<li><a class="reference internal" href="#module-sitka.components.site">Site</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="development/basics.html" title="previous chapter">Basics</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, James McNeill.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
