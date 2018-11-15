@@ -1,3 +1,5 @@
+"""Solar geometry, angles and shading.
+"""
 import numpy as np
 import pandas as pd
 
@@ -7,55 +9,34 @@ class SolarAngles(TimeSeriesComponent):
     """
     Store solar angles for a site.
 
-    ...
+    Parameters
+    ----------
+    time
+    site
 
     Attributes
     ----------
-    gamma : pd.Series
+    gamma : Series
         Gamma angle.
-    equation_of_time: pd.Series
+    equation_of_time: Series
         Equation of time.
-    apparent_solar_time: pd.Series
+    apparent_solar_time: Series
         Apparent solar time.
-    declination: pd.Series
+    declination: Series
         Solar declination angle.
-    hour_angle: pd.Series
+    hour_angle: Series
         Hour angle of the sun.
-    number_of_sunlight_hours: pd.Series
+    number_of_sunlight_hours: Series
         Number of sunlight hours per day.
-    sun_up: pd.Series
+    sun_up: Series
         Flag to define when the sun is above the
         horizon (1 = sun up, 0 = sun is down).
-    solar_zenith: pd.Series
+    solar_zenith: Series
         Solar zenith angle.
-    solar_altitude: pd.Series
+    solar_altitude: Series
         Solar altitude angle.
-    solar_azimuth: pd.Series
+    solar_azimuth: Series
         Solar azimuth angle.
-    air_mass: pd.Series
-        Air mass.
-    site: Site
-        A linked Site object.
-    time: Time
-        A linked Time object.
-
-    Methods
-    -------
-    update_calculated_values
-    calculate_gamma
-    calculate_equation_of_time
-    calculate_apparent_solar_time
-    calculate_declination
-    calculate_hour_angle
-    calculate_sunrise_hour_angle
-    calculate_sunset_hour_angle
-    calculate_number_of_sunlight_hours
-    calculate_sun_up
-    calculate_solar_zenith
-    calculate_solar_altitude
-    calculate_solar_azimuth
-    calculate_air_mass
-
     """
     def __init__(self, time, site):
         # Solar angles
@@ -71,7 +52,6 @@ class SolarAngles(TimeSeriesComponent):
         self.solar_zenith = None
         self.solar_altitude = None
         self.solar_azimuth = None
-        self.air_mass = None
 
         # General Properties
         self._site = site
@@ -99,7 +79,6 @@ class SolarAngles(TimeSeriesComponent):
         self.calculate_solar_zenith()
         self.calculate_solar_altitude()
         self.calculate_solar_azimuth()
-        self.calculate_air_mass()
 
     def calculate_gamma(self):
         """
@@ -354,27 +333,6 @@ class SolarAngles(TimeSeriesComponent):
         rad_solar_azimuth = np.arcsin(np.sin(rad_hour_angle)*np.cos(rad_declination)/np.cos(rad_solar_altitude))  #azimuth = 0 is due south
         solar_azimuth = np.rad2deg(rad_solar_azimuth)
         self.solar_azimuth = pd.Series(solar_azimuth)
-
-    def calculate_air_mass(self):
-        """
-        Calculate the air mass for each item in the series. [M]
-
-        Parameters
-        ----------
-        sun_up : Series
-        solar_zenith : Series
-
-        Yields
-        ----------
-        air_mass : Series
-
-        References
-        --------
-        """
-        sun_up = self.sun_up
-        solar_zenith = self.solar_zenith
-        air_mass = sun_up*1/np.cos(np.deg2rad(solar_zenith))
-        self.air_mass = pd.Series(air_mass)
 
     @property
     def site(self):

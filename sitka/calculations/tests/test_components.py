@@ -1,7 +1,7 @@
 import pytest
 
-from sitka.engine.time import Time
-from sitka.engine.calculations.solar_geometry import SolarAngles
+from sitka.io.time import Time
+from sitka.calculations.solar import SolarAngles
 from sitka.components.site import Site
 
 def test_solar_angles_init():

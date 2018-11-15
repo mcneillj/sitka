@@ -1,8 +1,8 @@
+"""General model environment and simulation settings.
+"""
 class Settings:
     """
     Store general simulation settings.
-
-    ...
 
     Parameters
     ----------

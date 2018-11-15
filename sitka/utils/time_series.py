@@ -1,3 +1,5 @@
+"""Super classes to attach time series attributes to base classes.
+"""
 class TimeSeriesComponent:
     """
     Component to attach the date-time object to a Pandas series attribute.

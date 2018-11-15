@@ -1,42 +1,42 @@
+"""Time constructs.
+"""
 import numpy as np
 import pandas as pd
 
 class Time:
-        """
-        Object to store solar angles for a site.
+    """
+    Object to store solar angles for a site.
 
-        ...
+    Parameters
+    ----------
+    year : int
+        The year to use in starting the date-time.
+    start_hour : int
+        The hour to start simulations.
+    end_hour : int
+        The ending hour for simulations.
+    time_steps_per_hour : int
+        The number of time steps per hour for a simulation.
 
-        Parameters
-        ----------
-        year : int
-            The year to use in starting the date-time.
-        start_hour : int
-            The hour to start simulations.
-        end_hour : int
-            The ending hour for simulations.
-        time_steps_per_hour : int
-            The number of time steps per hour for a simulation.
+    Attributes
+    ----------
+    time_range
+    datetime_range
+    time_step
+    _year
+    _start_hour
+    _end_hour
+    _time_steps_per_hour
 
-        Attributes
-        ----------
-        time_range
-        datetime_range
-        time_step
-        _year
-        _start_hour
-        _end_hour
-        _time_steps_per_hour
+    Methods
+    -------
+    update_calculated_values
+    calculate_time_step
+    calculate_time_range
+    calculate_datetime_range
+    calculate_julian_day
 
-        Methods
-        -------
-        update_calculated_values
-        calculate_time_step
-        calculate_time_range
-        calculate_datetime_range
-        calculate_julian_day
-
-        """
+    """
     def __init__(self, year=pd.datetime.now().year, start_hour=0, end_hour=8760, time_steps_per_hour=4):
         self.time_range = None
         self.datetime_range = None

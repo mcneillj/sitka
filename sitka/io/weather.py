@@ -1,9 +1,11 @@
+"""Weather files and weather data imports.
+"""
 import os
 import csv
 import numpy as np
 import pandas as pd
 
-class WeatherFile:
+class EPW:
     def __init__(self, settings, time, filename):  #weather_file_path, weather_file_name):
         self.filename = filename  # weather_file_name    #Name of weather file
         self._time = time

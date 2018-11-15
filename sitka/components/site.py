@@ -1,10 +1,10 @@
+"""Site and building information.
+"""
 import numpy as np
 
 class Site:
     """
     Represent the building site location and properties.
-
-    ...
 
     Parameters
     ----------
