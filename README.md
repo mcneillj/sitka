@@ -28,7 +28,7 @@ pip install sitka
 - [Pandas](https://pandas.pydata.org): 0.23.0 or higher
 
 ## Features
-* **Weather** - Import a weather file in EPW format and convert
+* **Weather** - Import a weather file in EPW format and convert to series.
 * **Solar:** Calculate solar angles for a site and determine solar radiation on surfaces.
 * **Envelope and Constructions (FUTURE):** Wall and window construction models.
 * **Thermal Zone (FUTURE):** Model thermal zones using the Heat Balance Method.
@@ -48,4 +48,4 @@ Contributors are welcome.  You can start by submitting an [issue](https://www.gi
 
 ### License
 
-React is [MIT licensed](./LICENSE).
+Sitka is [MIT licensed](./LICENSE).
