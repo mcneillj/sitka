@@ -73,7 +73,6 @@ class Time:
         --------
         time_step : float
         """
-        time_step : Series
         self.time_step = 3600/self.time_steps_per_hour  # time step [s]
 
     def calculate_time_range(self):
