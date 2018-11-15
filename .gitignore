@@ -26,6 +26,9 @@ var/
 .installed.cfg
 *.egg
 
+# sphinx build directory
+docs/_build
+
 # Pytest
 *.pytest_cache
 
