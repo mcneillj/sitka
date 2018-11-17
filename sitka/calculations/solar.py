@@ -342,3 +342,173 @@ class SolarAngles(TimeSeriesComponent):
     def site(self, value):
         self._site= value
         self.update_calculated_values()
+
+class SurfaceSolarAngles(TimeSeriesComponent):
+    """
+    Solar angles on a surface.
+
+    Parameters
+    ----------
+    name
+    time
+    solar_angles
+    surface
+
+    Attributes
+    ----------
+    name : string
+        Name of the surface solar angle object.
+    gamma : Series
+        Gamma angle.
+    sun_surface_azimuth: Series
+        Sun to surface azimuth angle [deg].
+    incidence_angle: Series
+        Incidence angle of the sun on the surface [deg].
+    sun_on_surface: Series
+        Flag defining whether the sun is incident on the surface.
+    profile_angle: Series
+        The profile angle of the sun [deg].
+    """
+    def __init__(self, name, time, solar_angles, surface):
+        # General properties
+        self.name = name
+        self.sun_surface_azimuth = None
+        self.incidence_angle = None
+        self.sun_on_surface = None
+        self.profile_angle = None
+
+        # Associated objects
+        self._surface = surface
+        self._solar_angles = solar_angles
+
+        # Add attributes from super class
+        super().__init__(time)
+
+        # Run method to update all calculated values
+        self.update_calculated_values()
+
+    def update_calculated_values(self):
+        print('Updating surface solar calculations for ' + self.name)
+        self.calculate_sun_surface_azimuth()  # Sun-surface azimuth angle [deg]
+        self.calculate_sun_on_surface()  # Times where surface is sunlit [date-time]
+        self.calculate_incidence_angle()  # Sun-surface incidence angle [deg]
+        self.calculate_profile_angle()
+
+    def calculate_sun_surface_azimuth(self):
+        """
+        Calculate the sun to surface azimuth angle for each item in the series.
+
+        Parameters
+        ----------
+        surface.azimuth : Series
+        solar_azimuth : Series
+
+        Yields
+        ----------
+        sun_surface_azimuth : Series
+
+        References
+        --------
+        """
+        surface_azimuth = np.ones(self.time.length)*self.surface.azimuth
+        solar_azimuth = self.solar_angles.solar_azimuth
+        sun_surface_azimuth = np.abs(surface_azimuth - solar_azimuth)
+        self.sun_surface_azimuth = pd.Series(sun_surface_azimuth)
+
+    def calculate_sun_on_surface(self):
+        """
+        Calculate whether the sun is incident on the surface for each item in the series.
+
+        Parameters
+        ----------
+        solar_altitude : Series
+        sun_surface_azimuth : Series
+
+        Yields
+        ----------
+        sun_on_surface : Series
+
+        References
+        --------
+        """
+        sun_on_surface = False*np.ones(self.time.length)
+        sun_on_surface[
+            (self.solar_angles.solar_altitude > 0) &
+            (self.sun_surface_azimuth < 90) &
+            (self.sun_surface_azimuth > -90)
+        ] = True
+        self.sun_on_surface = pd.Series(sun_on_surface)
+
+    def calculate_incidence_angle(self):
+        """
+        Calculate the incidence angle of the sun on the surface for each item in the series.
+
+        Parameters
+        ----------
+        sun_on_surface : Series
+        latitude : float
+        declination : Series
+        hour_angle : Series
+        solar_altitude : Series
+        surface_tilt : Series
+        surface_azimuth : Series
+        sun_surface_azimuth : Series
+
+        Yields
+        ----------
+        incidence_angle : Series
+
+        References
+        --------
+        """
+        sun_on_surface = self.sun_on_surface
+        latitude = np.deg2rad(self.solar_angles.site.latitude)
+        declination = np.deg2rad(self.solar_angles.declination)
+        hour_angle = np.deg2rad(self.solar_angles.hour_angle)
+        solar_altitude = np.deg2rad(self.solar_angles.solar_altitude)
+        surface_tilt = np.deg2rad(self.surface.tilt)
+        surface_azimuth = np.deg2rad(self.surface.azimuth)
+        sun_surface_azimuth = np.deg2rad(self.sun_surface_azimuth)
+        incidence_angle = np.rad2deg(np.arccos(np.cos(solar_altitude)*np.cos(sun_surface_azimuth)*np.sin(surface_tilt)+np.sin(solar_altitude)*np.cos(surface_tilt)))
+        self.incidence_angle = pd.Series(incidence_angle)
+
+    def calculate_profile_angle(self):
+        """
+        Calculate the profile angle of the sun on the surface for each item in the series.
+
+        Parameters
+        ----------
+        sun_on_surface : Series
+        solar_altitude : Series
+        sun_surface_azimuth : Series
+
+        Yields
+        ----------
+        profile_angle : Series
+
+        References
+        --------
+        """
+        sun_on_surface = self.sun_on_surface
+        solar_altitude = np.deg2rad(self.solar_angles.solar_altitude)
+        sun_surface_azimuth = np.deg2rad(self.sun_surface_azimuth)
+        profile_angle = np.rad2deg(np.arctan(np.tan(solar_altitude)/(np.cos(sun_surface_azimuth))))
+        self.profile_angle = pd.Series(profile_angle)
+
+    @property
+    def surface(self):
+        return self._surface
+
+    @surface.setter
+    def surface(self, value):
+        self._surface= value
+        self.update_calculated_values()
+
+    @property
+    def solar_angles(self):
+        return self._solar_angles
+
+    @solar_angles.setter
+    def solar_angles(self, value):
+        self._solar_angles = value
+        self.update_calculated_values()
