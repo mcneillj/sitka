@@ -5,6 +5,7 @@ import pandas as pd
 
 from sitka.utils.time_series import TimeSeriesComponent
 
+
 class SolarAngles(TimeSeriesComponent):
     """
     Store solar angles for a site.
@@ -349,15 +350,12 @@ class SurfaceSolarAngles(TimeSeriesComponent):
 
     Parameters
     ----------
-    name
     time
     solar_angles
     surface
 
     Attributes
     ----------
-    name : string
-        Name of the surface solar angle object.
     gamma : Series
         Gamma angle.
     sun_surface_azimuth: Series
@@ -369,9 +367,8 @@ class SurfaceSolarAngles(TimeSeriesComponent):
     profile_angle: Series
         The profile angle of the sun [deg].
     """
-    def __init__(self, name, time, solar_angles, surface):
+    def __init__(self, time, solar_angles, surface):
         # General properties
-        self.name = name
         self.sun_surface_azimuth = None
         self.incidence_angle = None
         self.sun_on_surface = None
@@ -388,7 +385,7 @@ class SurfaceSolarAngles(TimeSeriesComponent):
         self.update_calculated_values()
 
     def update_calculated_values(self):
-        print('Updating surface solar calculations for ' + self.name)
+        print('Updating surface solar calculations.')
         self.calculate_sun_surface_azimuth()  # Sun-surface azimuth angle [deg]
         self.calculate_sun_on_surface()  # Times where surface is sunlit [date-time]
         self.calculate_incidence_angle()  # Sun-surface incidence angle [deg]

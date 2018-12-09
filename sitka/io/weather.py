@@ -5,8 +5,11 @@ import csv
 import numpy as np
 import pandas as pd
 
-class EPW:
-    def __init__(self, settings, time, filename):  #weather_file_path, weather_file_name):
+from sitka.utils.time_series import TimeSeriesComponent
+
+
+class EPW(TimeSeriesComponent):
+    def __init__(self, time, filename=None):  #weather_file_path, weather_file_name):
         self.filename = filename  # weather_file_name    #Name of weather file
         self._time = time
         self.data_imported = False
@@ -48,9 +51,17 @@ class EPW:
             "liquid_precipitation_rate",  # liquid precipitation rate [hour]
         ]
 
-        # Methods to import data
-        self.import_epw_data()
-        self.resampling_data()
+        # Add attributes from super class
+        super().__init__(time)
+
+        # Run method to update all calculated values
+        self.update_calculated_values()
+
+    def update_calculated_values(self):
+        if self.time and self.filename:
+            # Methods to import data
+            self.import_epw_data()
+            self.resampling_data()
 
     def import_epw_data(self):
         print('Importing weather data.')
@@ -120,6 +131,7 @@ class EPW:
                 df = df.append(pd.Series([None], index=[(df.index[-1] + pd.Timedelta(hours=1))]))
                 df = (df.resample('%ds' % self.time.time_step).fillna(method='ffill'))/self.time.time_steps_per_hour
                 df = df.drop(df.index[-1])
+                df.index = range(0, len(df.index))  # reset the index to integers
 
                 self.__setattr__(key, df)
 
@@ -153,6 +165,7 @@ class EPW:
                 df = df.fillna(method='pad')
                 df = df.resample('%ds' % self.time.time_step).interpolate(method='linear')
                 df = df.drop(df.index[-1])
+                df.index = range(0, len(df.index))  # reset the index to integers
                 self.__setattr__(key, df)
 
     @property
