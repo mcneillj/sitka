@@ -7,7 +7,7 @@ import pandas as pd
 
 from sitka.utils.time_series import TimeSeriesComponent
 from sitka.calculations.solar import SurfaceSolarAngles
-from sitka.calculations.radiation import ExternalShortwaveRadiation
+from sitka.calculations.radiation import ExternalShortwaveRadiation, ExternalLongwaveRadiation
 
 
 class Surface:
@@ -69,6 +69,8 @@ class HeatTransferSurface(TimeSeriesComponent):
         Name of the surface.
     surface_solar_angles : SurfaceSolarAngles
     external_shortwave_radiation : ExternalShortwaveRadiation
+    external_longwave_radiation : ExternalLongwaveRadiation
+    exterior_surface_temperature : Series
     time : Time
     solar_angles : SolarAngles
     weather : Weather
@@ -82,6 +84,10 @@ class HeatTransferSurface(TimeSeriesComponent):
         # Solar Properties
         self.surface_solar_angles = None
         self.external_shortwave_radiation = None
+        self.external_longwave_radiation = None
+
+        # Thermal Properties
+        self.exterior_surface_temperature = None
 
         # Associated objects
         self._solar_angles = solar_angles
@@ -96,8 +102,23 @@ class HeatTransferSurface(TimeSeriesComponent):
 
     def update_calculated_values(self):
         if self.time and self.solar_angles and self.weather:
+            self.initialize_exterior_surface_temperature()
             self.setup_surface_solar_angles()
             self.setup_external_solar_radiation()
+
+    def initialize_exterior_surface_temperature(self):
+        """
+        Initialize the exterior surface temperature using the ambient dry bulb
+        temperature.
+
+        Yields
+        ----------
+        exterior_surface_temperature : Series
+
+        References
+        --------
+        """
+        self.exterior_surface_temperature = self.weather.dry_bulb_temperature
 
     def setup_surface_solar_angles(self):
         """
@@ -119,11 +140,13 @@ class HeatTransferSurface(TimeSeriesComponent):
         Yields
         ----------
         external_shortwave_radiation : ExternalShortwaveRadiation
+        external_longwave_radiation : ExternalLongwaveRadiation
 
         References
         --------
         """
         self.external_shortwave_radiation = ExternalShortwaveRadiation(self.time, self.solar_angles, self.weather, self.surface, self.surface_solar_angles)
+        self.external_longwave_radiation = ExternalLongwaveRadiation(self.time, self.weather, self.surface, self.exterior_surface_temperature)
 
     @property
     def solar_angles(self):

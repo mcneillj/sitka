@@ -25,6 +25,10 @@ class EPW(TimeSeriesComponent):
     time
     header_imported
     data_imported
+    stephan_boltzmann_constant : float
+        Stephan-Boltzmann constant
+    sky_temperature : Series
+        Sky tempereature [C]
     columns
 
     Methods
@@ -32,6 +36,7 @@ class EPW(TimeSeriesComponent):
     update_calculated_values
     import_epw_header
     import_epw_column_data
+    calculate_sky_temperature
     resample_integrated_data
     resample_instantaneous_data
 
@@ -41,6 +46,7 @@ class EPW(TimeSeriesComponent):
         self._time = time
         self.header_imported = False
         self.data_imported = False
+        self.stefan_boltzmann_constant = 5.67e-8  # Stephan-boltzmann constant
         self.columns = [
             "year",
             "month",
@@ -92,6 +98,7 @@ class EPW(TimeSeriesComponent):
             # Methods to import data
             self.import_epw_header()
             self.import_epw_column_data()
+            self.calculate_sky_temperature()
             self.resample_integrated_data()
             self.resample_instantaneous_data()
 
@@ -230,6 +237,22 @@ class EPW(TimeSeriesComponent):
         self.data_imported = True
         print('file imported.')
 
+    def calculate_sky_temperature(self):
+        """
+        Calculate the sky temperature for each item in the series.
+
+        Yields
+        ----------
+        sky_temp : Series
+
+        References
+        --------
+        """
+        stefan_boltzmann_constant = self.stefan_boltzmann_constant
+        horizontal_infrared_radiation_sky = self.horizontal_infrared_radiation_sky
+        sky_temperature = (horizontal_infrared_radiation_sky/stefan_boltzmann_constant)**0.25-273.15
+        self.sky_temperature = pd.Series(sky_temperature)
+
     def resample_integrated_data(self):
         """
         Resamples integrated parameters by summing over the new time period.
@@ -314,6 +337,7 @@ class EPW(TimeSeriesComponent):
                 #"days_since_snow",
                 "albedo",
                 "liquid_precipitation_rate",
+                "sky_temperature",
             ]
             for key in keys:
                 if key in self.__dict__.keys():
