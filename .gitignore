@@ -38,6 +38,9 @@ docs/_build
 # virtualenv
 venv/
 
+# visual studio
+.vs/
+
 # coverage reports
 .coverage
 .coverage.*

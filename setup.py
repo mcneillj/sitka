@@ -1,6 +1,8 @@
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, Extension
 from os import path
 from io import open
+
+solar2 = Extension('solar2', sources = ['src/solar2.cpp'])
 
 setup(
     name='sitka',
@@ -43,4 +45,6 @@ setup(
         "pandas>=0.23.0",
         "pytest>=3.5.1",
     ],
+    ext_modules=[solar2],
+    #ext_modules=[Extension("solar2", ["src\solar2.cpp"])],
 )

@@ -92,7 +92,7 @@ class Time:
         start_hour = self.start_hour*3600
         end_hour = self.end_hour*3600
         dt = self.time_step
-        time_range = np.linspace(start_hour,end_hour,end_hour/dt)
+        time_range = np.linspace(start_hour,end_hour,int(end_hour/dt))
         self.time_range = time_range
         self.length = len(time_range)
 
