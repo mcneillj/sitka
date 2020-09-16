@@ -3,7 +3,9 @@ python:
   - "3.6"
   - "3.7"
   - "3.8"
-dist: xenial
+  - "3.8-dev"
+  - "nightly"
+dist: bionic
 sudo: true
 # install dev dependencies
 before_install:
