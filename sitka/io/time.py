@@ -37,7 +37,7 @@ class Time:
     calculate_julian_day
 
     """
-    def __init__(self, year=pd.datetime.now().year, start_hour=0, end_hour=8760, time_steps_per_hour=4):
+    def __init__(self, year=pd.Timestamp.now().year, start_hour=0, end_hour=8760, time_steps_per_hour=4):
         self.time_range = None
         self.datetime_range = None
         self.time_step = None
