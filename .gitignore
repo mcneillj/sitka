@@ -38,6 +38,9 @@ docs/_build
 # virtualenv
 venv/
 
+# VS Code
+.vscode/
+
 # coverage reports
 .coverage
 .coverage.*
