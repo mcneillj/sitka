@@ -24,8 +24,8 @@ pip install sitka
 ```
 
 ## Dependencies
-- [NumPy](https://www.numpy.org): 1.9.0 or higher
-- [Pandas](https://pandas.pydata.org): 0.23.0 or higher
+- [NumPy](https://www.numpy.org): 1.19.2 or higher
+- [Pandas](https://pandas.pydata.org): 1.1.2 or higher
 
 ## Features
 * **Weather** - Import a weather file in EPW format and convert to series.
