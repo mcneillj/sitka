@@ -118,7 +118,8 @@ class HeatTransferSurface(TimeSeriesComponent):
         References
         --------
         """
-        self.exterior_surface_temperature = self.weather.dry_bulb_temperature
+        if self.weather.dry_bulb_temperature is not None:
+            self.exterior_surface_temperature = self.weather.dry_bulb_temperature
 
     def setup_surface_solar_angles(self):
         """

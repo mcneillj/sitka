@@ -30,6 +30,71 @@ class EPW(TimeSeriesComponent):
     sky_temperature : Series
         Sky tempereature [C]
     columns
+    incident_direct_radiation : Series
+    year : Series
+    month : Series
+    day : Series
+    hour : Series
+    minute : Series
+    datasource : Series
+    dry_bulb_temperature : Series
+        ambient dry bulb temperature [C]
+    dew_point_temperature : Series
+        ambient dew point temperature [C]
+    relative_humidity : Series
+        ambient relative humidity [#]
+    atmospheric_pressure : Series
+        atmospheric pressure [Pa]
+    extraterrestrial_horizontal_radiation : Series
+        extraterrestrial horizontal radiation [Wh/m2]
+    extraterrestrial_direct_radiation : Series
+        extraterrestrial direct radiation [Wh/m2]
+    horizontal_infrared_radiation_sky : Series
+        horizontal infrared radiation intensity from sky [Wh/m2]
+    global_horizontal_radiation : Series
+        global horizontal radiation [Wh/m2]
+    direct_normal_radiation : Series
+        direct normal radiation [Wh/m2]
+    diffuse_horizontal_radiation : Series
+        diffuse horizontal radiation [Wh/m2]
+    global_horizontal_illuminance : Series
+        global horizontal illuminance [lux]
+    direct_normal_illuminance : Series
+        direct normal illuminance [lux]
+    diffuse_horizontal_illuminance : Series
+        diffuse horizontal illuminance [lux]
+    zenith_luminance : Series
+        zenith luminance [lux]
+    wind_direction : Series
+        wind direction [deg]
+    wind_speed : Series
+        wind speed [m/s]
+    total_sky_cover : Series
+        total sky cover [tenths]
+    opaque_sky_cover : Series
+        opaque sky cover [tenths]
+    visibility : Series
+        visibility [km]
+    ceiling_height : Series
+        ceiling height [m]
+    present_weather_observation : Series
+        precipitable water [mm]
+    present_weather_code : Series
+        aerosol optical depth [thousandths]
+    precipitable_water : Series
+        snow depth [cm]
+    aerosol_optical_depth : Series
+        aerosol optical depth [thousandths]
+    snow_depth : Series
+        snow depth [cm]
+    days_since_snow : Series
+        days since last snow occurred [days]
+    albedo : Series
+        albedo []
+    liquid_precipitation_depth : Series
+        liquid precipitation depth [mm]
+    liquid_precipitation_rate : Series
+        liquid precipitation rate [hour]
 
     Methods
     -------
@@ -84,6 +149,39 @@ class EPW(TimeSeriesComponent):
             "liquid_precipitation_depth",  # liquid precipitation depth [mm]
             "liquid_precipitation_rate",  # liquid precipitation rate [hour]
         ]
+        self.location = None
+        self.state = None
+        self.country = None
+        self.data_type = None
+        self.station_id = None
+        self.latitude = None
+        self.longitude = None
+        self.time_zone = None
+        self.elevation = None
+        self.dry_bulb_temperature = None
+        self.dew_point_temperature = None
+        self.relative_humidity = None
+        self.atmospheric_pressure = None
+        self.extraterrestrial_horizontal_radiation = None
+        self.extraterrestrial_direct_radiation = None
+        self.horizontal_infrared_radiation_sky = None
+        self.global_horizontal_radiation = None
+        self.direct_normal_radiation = None
+        self.diffuse_horizontal_radiation = None
+        self.global_horizontal_illuminance = None
+        self.direct_normal_illuminance = None
+        self.diffuse_horizontal_illuminance = None
+        self.zenith_luminance = None
+        self.wind_direction = None
+        self.wind_speed = None
+        self.total_sky_cover = None
+        self.opaque_sky_cover = None
+        self.visibility = None
+        self.ceiling_height = None
+        self.aerosol_optical_depth = None
+        self.albedo = None
+        self.liquid_precipitation_rate = None
+        self.sky_temperature = None
 
         # Add attributes from super class
         super().__init__(time)
@@ -281,6 +379,7 @@ class EPW(TimeSeriesComponent):
                 "snow_depth",
                 "liquid_precipitation_depth",
             ]
+            
             for key in keys:
                 if key in self.__dict__.keys():
                     df = self.__getattribute__(key).astype(float)

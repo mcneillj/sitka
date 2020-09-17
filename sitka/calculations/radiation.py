@@ -357,15 +357,17 @@ class ExternalLongwaveRadiation(TimeSeriesComponent):
         References
         --------
         """
-        amb_temp = self.weather.dry_bulb_temperature
-        abs_amb_temp = amb_temp+273
-        surf_temp = self.surface_temperature
-        abs_surf_temp = self.surface_temperature+273
 
-        # initialize array
-        hrgnd = pd.Series(np.zeros(self.time.length))
-        hrgnd[amb_temp != surf_temp] = self.absorptivity*self.sigma*self.ground_view_factor*((abs_amb_temp)**4-(abs_surf_temp)**4)/(amb_temp-surf_temp)
-        self.ground_radiation = pd.Series(hrgnd)
+        if self.weather.dry_bulb_temperature is not None:
+            amb_temp = self.weather.dry_bulb_temperature
+            abs_amb_temp = amb_temp+273
+            surf_temp = self.surface_temperature
+            abs_surf_temp = self.surface_temperature+273
+
+            # initialize array
+            hrgnd = pd.Series(np.zeros(self.time.length))
+            hrgnd[amb_temp != surf_temp] = self.absorptivity*self.sigma*self.ground_view_factor*((abs_amb_temp)**4-(abs_surf_temp)**4)/(amb_temp-surf_temp)
+            self.ground_radiation = pd.Series(hrgnd)
 
     def calculate_sky_long_wave_radiation(self):
         """
@@ -379,15 +381,16 @@ class ExternalLongwaveRadiation(TimeSeriesComponent):
         References
         --------
         """
-        sky_temp = self.weather.sky_temperature
-        abs_sky_temp = self.weather.sky_temperature+273
-        surf_temp = self.surface_temperature
-        abs_surf_temp = self.surface_temperature+273
+        if self.weather.sky_temperature is not None:
+            sky_temp = self.weather.sky_temperature
+            abs_sky_temp = self.weather.sky_temperature+273
+            surf_temp = self.surface_temperature
+            abs_surf_temp = self.surface_temperature+273
 
-        # initialize array
-        hrsky = pd.Series(np.zeros(self.time.length))
-        hrsky[sky_temp != surf_temp] = self.absorptivity*self.sigma*self.sky_view_factor*((abs_sky_temp)**4-(abs_surf_temp)**4)/(sky_temp-surf_temp)
-        self.sky_radiation = pd.Series(hrsky)
+            # initialize array
+            hrsky = pd.Series(np.zeros(self.time.length))
+            hrsky[sky_temp != surf_temp] = self.absorptivity*self.sigma*self.sky_view_factor*((abs_sky_temp)**4-(abs_surf_temp)**4)/(sky_temp-surf_temp)
+            self.sky_radiation = pd.Series(hrsky)
 
     def calculate_air_long_wave_radiation(self):
         """
@@ -401,16 +404,16 @@ class ExternalLongwaveRadiation(TimeSeriesComponent):
         References
         --------
         """
-        amb_temp = self.weather.dry_bulb_temperature
-        abs_amb_temp = self.weather.dry_bulb_temperature+273
-        surf_temp = self.surface_temperature
-        abs_surf_temp = self.surface_temperature+273
+        if self.weather.dry_bulb_temperature is not None:
+            amb_temp = self.weather.dry_bulb_temperature
+            abs_amb_temp = self.weather.dry_bulb_temperature+273
+            surf_temp = self.surface_temperature
+            abs_surf_temp = self.surface_temperature+273
 
-        # initialize array
-
-        hrair = pd.Series(np.zeros(self.time.length))
-        hrair[amb_temp != surf_temp] = self.absorptivity*self.sigma*self.air_view_factor*((abs_amb_temp)**4-(abs_surf_temp)**4)/(amb_temp-surf_temp)
-        self.air_radiation = pd.Series(hrair)
+            # initialize array
+            hrair = pd.Series(np.zeros(self.time.length))
+            hrair[amb_temp != surf_temp] = self.absorptivity*self.sigma*self.air_view_factor*((abs_amb_temp)**4-(abs_surf_temp)**4)/(amb_temp-surf_temp)
+            self.air_radiation = pd.Series(hrair)
 
     def calculate_total_long_wave_radiation(self):
         """
@@ -424,8 +427,9 @@ class ExternalLongwaveRadiation(TimeSeriesComponent):
         References
         --------
         """
-        total_radiation = self.ground_radiation + self.sky_radiation + self.air_radiation
-        self.total_radiation = pd.Series(total_radiation)
+        if (self.ground_radiation is not None) and (self.sky_radiation is not None) and (self.air_radiation is not None):
+            total_radiation = self.ground_radiation + self.sky_radiation + self.air_radiation
+            self.total_radiation = pd.Series(total_radiation)
 
 
     @property
