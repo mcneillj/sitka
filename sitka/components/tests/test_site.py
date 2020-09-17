@@ -2,6 +2,15 @@ import pytest
 
 from sitka.components.site import Site
 
+
+def test_site_init():
+    site = Site(latitude=40.0, elevation=100.0)
+
+    assert site is not None
+    assert site.latitude == 40.0
+    assert site.longitude == 0.0
+    assert site.elevation == 100.0
+
 def test_us_atlantic_standard_meridian_calculation():
     # representative city: Halifax, Nova Scotia, Canada
     site = Site(latitude=44.65, longitude=-63.58)
