@@ -39,8 +39,9 @@ setup(
     packages=find_packages(include=['sitka', 'sitka.*']),
     include_package_data=True,
     install_requires=[
-        "numpy>=1.19.2",
-        "pandas>=1.1.2",
-        "pytest>=6.0.2",
+        "numpy>=1.19.0",
+        "pandas>=1.1.0",
+        "pytest>=7.1.0",
+        "pytest-cov>=3.0.0",
     ],
 )
